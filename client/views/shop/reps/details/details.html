@@ -1,0 +1,104 @@
+<template name="ShopRepsDetails">
+	<div class="page-container container" id="content">
+		<div class="row" id="title_row">
+			<div class="col-md-12">
+				<div id="page_menu" class="pull-right">
+				</div>
+			</div>
+		</div>
+		{{> ShopRepsDetailsDetailsForm}}
+	</div>
+</template>
+
+<template name="ShopRepsDetailsDetailsForm">
+	<div id="shop-reps-details-details-form" class="">
+		<h2 id="component-title">
+			<a href="#" id="form-back-button" class="btn btn-default" title="back">
+				<span class="fa fa-chevron-left">
+				</span>
+			</a>
+			영업자 Details
+		</h2>
+		<form role="form" class="form-horizontal">
+			{{#if errorMessage}}
+			<div class="alert alert-warning">
+				{{errorMessage}}
+			</div>
+			{{/if}}		
+		
+			{{#if infoMessage}}
+			<div class="alert alert-success">
+				{{infoMessage}}
+			</div>
+			{{/if}}
+			<div class="form-group  field-name">
+				<label for="name" class="col-sm-3 control-label">
+					이름
+				</label>
+				<div class="input-div col-sm-9">
+					<p class="form-control-static">
+						{{rep_details.name}}
+					</p>
+				</div>
+			</div>
+			<div class="form-group  field-phone">
+				<label for="phone" class="col-sm-3 control-label">
+					전화
+				</label>
+				<div class="input-div col-sm-9">
+					<p class="form-control-static">
+						{{rep_details.phone}}
+					</p>
+				</div>
+			</div>
+			<div class="form-group  field-email">
+				<label for="email" class="col-sm-3 control-label">
+					E-mail
+				</label>
+				<div class="input-div col-sm-9">
+					<p class="form-control-static">
+						{{rep_details.email}}
+					</p>
+				</div>
+			</div>
+			<div class="form-group  field-total-amount">
+				<label for="totalAmount" class="col-sm-3 control-label">
+					주문금액
+				</label>
+				<div class="input-div col-sm-9">
+					<p class="form-control-static">
+						{{formatCurrency rep_details.totalAmount}}
+					</p>
+				</div>
+			</div>
+			<div class="form-group  field-total-paid">
+				<label for="totalPaid" class="col-sm-3 control-label">
+					고객 결제금액
+				</label>
+				<div class="input-div col-sm-9">
+					<p class="form-control-static">
+						{{formatCurrency rep_details.totalPaid}}
+					</p>
+				</div>
+			</div>
+			<div class="form-group  field-note">
+				<label for="note" class="col-sm-3 control-label">
+					Note
+				</label>
+				<div class="input-div col-sm-9">
+					<p class="form-control-static">
+						{{rep_details.note}}
+					</p>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="submit-div col-sm-9 col-sm-offset-3">
+					<a href="#" id="form-close-button" class="btn btn-primary">
+						OK
+					</a>
+				</div>
+			</div>
+		</form>
+	</div>
+</template>
+

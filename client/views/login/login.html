@@ -1,0 +1,38 @@
+<template name="Login">
+	<div class="container">
+		<form id="login_form" class="account-form" role="form">
+			<h2>
+				로그인 하세요
+			</h2>
+			{{#if errorMessage}}
+			<div class="alert alert-warning">
+				{{errorMessage}}
+			</div>
+			{{/if}}
+			<div id="login-with-password" style="padding-top: 10px;">
+				<input id="login_email" type="text" class="form-control" placeholder="로그인 아이디" required autofocus>
+				<input id="login_password" type="password" class="form-control" placeholder="비밀번호" required>
+				<button class="btn btn-lg btn-primary btn-block" type="submit" data-loading-text="잠시만 기다리세요...">
+					로그인 하기
+				</button>
+
+
+				<p class="account-form-text-after" id="register-link">
+					Not a member?
+					<a href="{{pathFor 'register'}}">
+						Sign up here
+					</a>
+				</p>
+
+
+				<p class="account-form-text-after" id="forgot-password-link">
+					비밀번호를 잊으셨나요?
+					<a href="{{pathFor 'forgot_password'}}">
+						여기를 클릭하세요
+					</a>
+				</p>
+			</div>
+		</form>
+	</div>
+</template>
+

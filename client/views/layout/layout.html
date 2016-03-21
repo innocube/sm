@@ -1,0 +1,256 @@
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>
+		DSET SM - V 0.15.14
+	</title>
+</head>
+<template name="layout">
+	{{#if currentUser}}
+		{{> PrivateLayout}}
+	{{else}}
+		{{> PublicLayout}}
+	{{/if}}
+</template>
+
+<template name="PublicLayout">
+	<div id="content" class="sticky-wrapper">
+		<div id="navbar" class="navbar navbar-fixed-top navbar-default" role="navigation">
+			<div class="navbar-container container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="sr-only">
+							Toggle navigation
+						</span>
+						<span class="icon-bar">
+						</span>
+						<span class="icon-bar">
+						</span>
+						<span class="icon-bar">
+						</span>
+					</button>
+					<a class="navbar-brand" href="#">
+						DSET SM - V 0.15.14
+					</a>
+				</div>
+				<div id="menu" class="collapse navbar-collapse">
+					{{> PublicLayoutLeftMenu}}{{> PublicLayoutRightMenu}}
+				</div>
+			</div>
+		</div>
+		<div class="navbar-spacer">
+		</div>
+		{{> yield}}
+	</div>
+	<div id="footer" class="sticky-footer">
+		<div class="footer-container container">
+			<p class="text-muted">
+			</p>
+		</div>
+	</div>
+</template>
+
+<template name="PublicLayoutLeftMenu">
+	<ul id="menu-items" class="nav navbar-nav">
+		<li id="menu-item-simple" class="{{menuItemClass 'home_public'}}">
+			<a href="{{pathFor 'home_public'}}">
+				<span class="fa fa-home">
+				</span>
+				<span class="item-title">
+					&nbsp;Home
+				</span>
+			</a>
+		</li>
+	</ul>
+</template>
+
+<template name="PublicLayoutRightMenu">
+	<ul id="menu-items" class="nav navbar-nav navbar-right">
+		<li id="menu-item-simple" class="{{menuItemClass 'login'}}">
+			<a href="{{pathFor 'login'}}">
+				<span class="item-title">
+					로그 인
+				</span>
+			</a>
+		</li>
+	</ul>
+</template>
+
+<template name="PrivateLayout">
+	<div id="content" class="sticky-wrapper">
+		<div id="navbar" class="navbar navbar-fixed-top navbar-default" role="navigation">
+			<div class="navbar-container container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="sr-only">
+							Toggle navigation
+						</span>
+						<span class="icon-bar">
+						</span>
+						<span class="icon-bar">
+						</span>
+						<span class="icon-bar">
+						</span>
+					</button>
+					<a class="navbar-brand" href="#">
+						DSET SM - V 0.15.14
+					</a>
+				</div>
+				<div id="menu" class="collapse navbar-collapse">
+					{{> PrivateLayoutLeftMenu}}{{> PrivateLayoutRightMenu}}
+				</div>
+			</div>
+		</div>
+		<div class="navbar-spacer">
+		</div>
+		{{> yield}}
+	</div>
+	<div id="footer" class="sticky-footer">
+		<div class="footer-container container">
+			<p class="text-muted">
+			</p>
+		</div>
+	</div>
+</template>
+
+<template name="PrivateLayoutLeftMenu">
+	<ul id="menu-items" class="nav navbar-nav">
+		<li id="menu-item-simple" class="{{menuItemClass 'home_private'}}">
+			<a href="{{pathFor 'home_private'}}">
+				<span class="fa fa-home">
+				</span>
+				<span class="item-title">
+					&nbsp;Home
+				</span>
+			</a>
+		</li>
+		<li id="menu-item-dropdown" class="dropdown {{menuItemClass 'shop.items'}}">
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+				<span class="fa fa-gears">
+				</span>
+				<span class="item-title">
+					&nbsp;샵 관리
+				</span>
+				<b class="caret">
+				</b>
+			</a>
+			<ul id="menu-items" class="dropdown-menu">
+				<li class="{{menuItemClass 'shop.reps'}}">
+					<a href="{{pathFor 'shop.reps'}}">
+						<span class="fa fa-user">
+						</span>
+						<span class="item-title">
+							&nbsp;영업자 관리
+						</span>
+					</a>
+				</li>
+				<li class="{{menuItemClass 'shop.items'}}">
+					<a href="{{pathFor 'shop.items'}}">
+						<span class="fa fa-tags">
+						</span>
+						<span class="item-title">
+							&nbsp;상품 관리
+						</span>
+					</a>
+				</li>
+				<li class="{{menuItemClass 'shop.cats'}}">
+					<a href="{{pathFor 'shop.cats'}}">
+						<span class="fa fa-folder-open-o">
+						</span>
+						<span class="item-title">
+							&nbsp;카테고리 관리
+						</span>
+					</a>
+				</li>
+			</ul>
+		</li>
+		<li id="menu-item-dropdown" class="dropdown {{menuItemClass 'order.invoices'}}">
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+				<span class="fa fa-cart-plus">
+				</span>
+				<span class="item-title">
+					&nbsp;주문 관리
+				</span>
+				<b class="caret">
+				</b>
+			</a>
+			<ul id="menu-items" class="dropdown-menu">
+				<li class="{{menuItemClass 'order.invoices'}}">
+					<a href="{{pathFor 'order.invoices'}}">
+						<span class="fa fa-barcode">
+						</span>
+						<span class="item-title">
+							&nbsp;주문서
+						</span>
+					</a>
+				</li>
+				<li class="{{menuItemClass 'order.delivery'}}">
+					<a href="{{pathFor 'order.delivery'}}">
+						<span class="fa fa-truck">
+						</span>
+						<span class="item-title">
+							&nbsp;출고 관리
+						</span>
+					</a>
+				</li>
+				<li class="{{menuItemClass 'order.finance'}}">
+					<a href="{{pathFor 'order.finance'}}">
+						<span class="fa fa-credit-card">
+						</span>
+						<span class="item-title">
+							&nbsp;결제 관리
+						</span>
+					</a>
+				</li>
+				<li class="{{menuItemClass 'order.customers'}}">
+					<a href="{{pathFor 'order.customers'}}">
+						<span class="fa fa-group">
+						</span>
+						<span class="item-title">
+							&nbsp;고객 관리
+						</span>
+					</a>
+				</li>
+			</ul>
+		</li>
+	</ul>
+</template>
+
+<template name="PrivateLayoutRightMenu">
+	<ul id="menu-items" class="nav navbar-nav navbar-right">
+		<li id="menu-item-simple" class="{{menuItemClass 'admin'}}">
+			<a href="{{pathFor 'admin'}}">
+				<span class="fa fa-wrench">
+				</span>
+				<span class="item-title">
+					&nbsp;Admin
+				</span>
+			</a>
+		</li>
+		<li id="menu-item-dropdown" class="dropdown ">
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+				<span class="item-title">
+					{{userEmail}}
+				</span>
+				<b class="caret">
+				</b>
+			</a>
+			<ul id="menu-items" class="dropdown-menu">
+				<li class="{{menuItemClass 'user_settings'}}">
+					<a href="{{pathFor 'user_settings'}}">
+						<span class="item-title">
+							세팅 변경
+						</span>
+					</a>
+				</li>
+				<li class="{{menuItemClass 'logout'}}">
+					<a href="{{pathFor 'logout'}}">
+						<span class="item-title">
+							로그 아웃
+						</span>
+					</a>
+				</li>
+			</ul>
+		</li>
+	</ul>
+</template>
+

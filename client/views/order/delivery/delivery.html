@@ -1,0 +1,164 @@
+<template name="OrderDelivery">
+	<div class="page-container container" id="content">
+		<div class="row" id="title_row">
+			<div class="col-md-12">
+				<div id="page_menu" class="pull-right">
+				</div>
+			</div>
+		</div>
+		{{> OrderDeliveryView}}
+	</div>
+</template>
+
+<template name="OrderDeliveryView">
+	<div id="order-delivery-view" class="">
+		<h2 id="component-title">
+			출고 관리
+		</h2>
+		<form id="dataview-controls" class="form-inline">
+			<div id="dataview-controls-search">
+				{{#if isNotEmpty}}
+				<div id="dataview-controls-search-group" class="form-group">
+					<label class="sr-only" for="search">
+						Search
+					</label>
+					<input type="text" class="form-control" id="dataview-search-input" placeholder="Search" name="search" value="{{searchString}}" autofocus="autofocus">
+					<button type="button" id="dataview-search-button" class="btn btn-primary">
+						<span class="fa fa-search">
+						</span>
+					</button>
+				</div>
+				{{/if}}
+			</div>
+			<div id="dataview-controls-export" class="form-group">
+				{{#if isNotEmpty}}			
+		{{#if isFound}}
+				<div>
+				</div>
+				{{else}}
+				<div class="btn-group">
+					<button type="button" class="btn btn-default" id="dataview-export-default">
+						Export
+					</button>
+					<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+						<span class="caret">
+						</span>
+					</button>
+					<ul class="dropdown-menu" role="menu">
+						<li>
+							<a href="#" id="dataview-export-csv">
+								Export to CSV
+							</a>
+						</li>
+						<li>
+							<a href="#" id="dataview-export-tsv">
+								Export to TSV
+							</a>
+						</li>
+						<li>
+							<a href="#" id="dataview-export-json">
+								Export to JSON
+							</a>
+						</li>
+					</ul>
+				</div>
+				{{/if}}			
+	{{/if}}
+			</div>
+		</form>
+		{{#if isNotEmpty}}	
+			{{#if isNotFound}}
+		<div class="alert alert-warning">
+			"{{searchString}}" not found.
+		</div>
+		{{else}}
+		<div id="dataview-data">
+			{{#if viewAsTable}} {{> OrderDeliveryViewTable}} {{/if}}
+		</div>
+		{{/if}}	
+		{{else}}
+		<div class="alert alert-info">
+			등록된 주문서가 없습니다 :(
+		</div>
+		{{/if}}
+	</div>
+</template>
+
+<template name="OrderDeliveryViewTable">
+	<table id="dataview-table" class="table table-striped">
+		<thead id="dataview-table-header">
+			<tr id="dataview-table-header-row">
+				<th class="th-sortable" data-sort="customer.name">
+					고객
+				</th>
+				<th class="th-sortable" data-sort="invoiceNumber">
+					주문서 No
+				</th>
+				<th class="th-sortable" data-sort="date">
+					주문 날짜
+				</th>
+				<th class="th-sortable" data-sort="orderedBy">
+					주문자
+				</th>
+				<th class="th-sortable" data-sort="totalAmount">
+					주문 금액
+				</th>
+				<th class="th-sortable" data-sort="totalPaid">
+					결제금액
+				</th>
+				<th class="th-sortable" data-sort="VAT">
+					부가가치세
+				</th>
+				<th class="th-sortable" data-sort="shippingStatus">
+					출고 상태
+				</th>
+				<th class="th-sortable" data-sort="shipDate">
+					발송 날짜
+				</th>
+				<th>
+					&nbsp;
+				</th>
+			</tr>
+		</thead>
+		<tbody id="dataview-table-items">
+			{{#each tableItems}} {{> OrderDeliveryViewTableItems}} {{/each}}
+		</tbody>
+	</table>
+</template>
+
+<template name="OrderDeliveryViewTableItems">
+	<tr id="dataview-table-items-row">
+		<td>
+			{{customer.name}}
+		</td>
+		<td>
+			{{invoiceNumber}}
+		</td>
+		<td>
+			{{formatDate date 'YYYY-MM-DD'}}
+		</td>
+		<td>
+			{{orderedBy}}
+		</td>
+		<td>
+			{{formatCurrency totalAmount}}
+		</td>
+		<td>
+			{{formatCurrency totalPaid}}
+		</td>
+		<td>
+			{{VAT}}
+		</td>
+		<td>
+			{{shippingStatus}}
+		</td>
+		<td>
+			{{formatDate shipDate 'YYYY-MM-DD'}}
+		</td>
+		<td class="td-icon">
+			<span id="edit-button" class="fa fa-pencil {{editButtonClass}}" title="Edit">
+			</span>
+		</td>
+	</tr>
+</template>
+

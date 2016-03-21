@@ -1,0 +1,116 @@
+<template name="OrderInvoicesDetailsInvoiceItems">
+	<div class="page-container container" id="content">
+		<div class="row" id="title_row">
+			<div class="col-md-12">
+				<div id="page_menu" class="pull-right">
+				</div>
+			</div>
+		</div>
+		{{> OrderInvoicesDetailsInvoiceItemsView}}
+	</div>
+</template>
+
+<template name="OrderInvoicesDetailsInvoiceItemsView">
+	<div id="order-invoices-details-invoice-items-view" class="">
+		<form id="dataview-controls" class="form-inline">
+			<div id="dataview-controls-insert" class="form-group {{insertButtonClass}}">
+				<button type="submit" id="dataview-insert-button" class="btn btn-success">
+					<span class="fa fa-plus">
+					</span>
+					상품 추가하기
+				</button>
+			</div>
+			<div id="dataview-controls-search">
+				{{#if isNotEmpty}}
+				<div id="dataview-controls-search-group" class="form-group">
+					<label class="sr-only" for="search">
+						Search
+					</label>
+					<input type="text" class="form-control" id="dataview-search-input" placeholder="Search" name="search" value="{{searchString}}" autofocus="autofocus">
+					<button type="button" id="dataview-search-button" class="btn btn-primary">
+						<span class="fa fa-search">
+						</span>
+					</button>
+				</div>
+				{{/if}}
+			</div>
+		</form>
+		{{#if isNotEmpty}}	
+			{{#if isNotFound}}
+		<div class="alert alert-warning">
+			"{{searchString}}" not found.
+		</div>
+		{{else}}
+		<div id="dataview-data">
+			{{#if viewAsTable}} {{> OrderInvoicesDetailsInvoiceItemsViewTable}} {{/if}}
+		</div>
+		{{/if}}	
+		{{else}}
+		<div class="alert alert-info">
+			상품이 없습니다
+		</div>
+		{{/if}}
+	</div>
+</template>
+
+<template name="OrderInvoicesDetailsInvoiceItemsViewTable">
+	<table id="dataview-table" class="table table-striped">
+		<thead id="dataview-table-header">
+			<tr id="dataview-table-header-row">
+				<th class="th-sortable" data-sort="cats.cat">
+					카테고리
+				</th>
+				<th class="th-sortable" data-sort="item.description">
+					상품
+				</th>
+				<th class="th-sortable" data-sort="quantity">
+					수량
+				</th>
+				<th class="th-sortable" data-sort="price">
+					가격
+				</th>
+				<th class="th-sortable" data-sort="amount">
+					합계
+				</th>
+				<th>
+					&nbsp;
+				</th>
+				<th>
+					&nbsp;
+				</th>
+			</tr>
+		</thead>
+		<tbody id="dataview-table-items">
+			{{#each tableItems}} {{> OrderInvoicesDetailsInvoiceItemsViewTableItems}} {{/each}}
+		</tbody>
+	</table>
+</template>
+
+<template name="OrderInvoicesDetailsInvoiceItemsViewTableItems">
+	<tr id="dataview-table-items-row">
+		<td>
+			{{cats.cat}}
+		</td>
+		<td>
+			{{item.description}}
+		</td>
+		<td>
+			{{quantity}}
+		</td>
+		<td>
+			{{formatCurrency price}}
+		</td>
+		<td>
+			{{formatCurrency amount}}
+		</td>
+		<td class="td-icon">
+			<span id="edit-button" class="fa fa-pencil {{editButtonClass}}" title="Edit">
+			</span>
+		</td>
+		<td class="td-icon">
+			<span id="delete-button" class="fa fa-trash-o {{deleteButtonClass}}" title="Delete">
+			</span>
+		</td>
+	</tr>
+</template>
+

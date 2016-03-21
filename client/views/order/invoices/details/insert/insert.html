@@ -1,0 +1,109 @@
+<template name="OrderInvoicesDetailsInsert">
+	<div class="page-container container" id="content">
+		<div class="row" id="title_row">
+			<div class="col-md-12">
+				<div id="page_menu" class="pull-right">
+				</div>
+			</div>
+		</div>
+		{{> OrderInvoicesDetailsInsertInsertForm}}
+	</div>
+</template>
+
+<template name="OrderInvoicesDetailsInsertInsertForm">
+	<div id="order-invoices-details-insert-insert-form" class="">
+		<h2 id="component-title">
+			상품 추가하기
+		</h2>
+		<form role="form" class="form-horizontal">
+			{{#if errorMessage}}
+			<div class="alert alert-warning">
+				{{errorMessage}}
+			</div>
+			{{/if}}		
+		
+			{{#if infoMessage}}
+			<div class="alert alert-success">
+				{{infoMessage}}
+			</div>
+			{{/if}}
+			<div class="form-group  field-cat-id">
+				<label for="catId" class="col-sm-3 control-label">
+					카테고리
+				</label>
+				<div class="input-div col-sm-9">
+					<select class="form-control" name="catId" required="required" autofocus="autofocus">
+                        <option value="">
+                            카테고리를 선택하세요
+                        </option>
+                        {{#each cat_list}}
+						<option value="{{_id}}" {{prevClass}}>
+							{{cat}}
+						</option>
+						{{/each}}
+					</select>
+					<span id="help-text" class="help-block">
+					</span>
+					<span id="error-text" class="help-block">
+					</span>
+				</div>
+			</div>
+			<div class="form-group  field-item-id">
+				<label for="itemId" class="col-sm-3 control-label">
+					상품
+				</label>
+				<div class="input-div col-sm-9">
+                    <div class="radio">
+                        {{#each item_list}}
+                            <label>
+                                <input type="radio" value="{{_id}}" name="itemId">
+                                {{description}}
+                            </label><br>
+                        {{/each}}
+                    </div>
+					<span id="help-text" class="help-block">
+					</span>
+					<span id="error-text" class="help-block">
+					</span>
+				</div>
+			</div>
+			<div class="form-group  field-quantity">
+				<label for="quantity" class="col-sm-3 control-label">
+					수량
+				</label>
+				<div class="input-div col-sm-9">
+					<input type="text" name="quantity" value="1" class="form-control" required="required" data-type="float">
+					<span id="help-text" class="help-block">
+					</span>
+					<span id="error-text" class="help-block">
+					</span>
+				</div>
+			</div>
+			<div class="form-group  field-price">
+				<label for="price" class="col-sm-3 control-label">
+					가격
+				</label>
+				<div class="input-div col-sm-9">
+					<input type="text" name="price" value="{{getPrice}}" class="form-control" data-type="float">
+					<span id="help-text" class="help-block">
+					</span>
+					<span id="error-text" class="help-block">
+					</span>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="submit-div col-sm-9 col-sm-offset-3">
+					<button id="form-submit-button" class="btn btn-success" type="submit">
+						<span class="fa fa-check">
+						</span>
+						Save
+					</button>
+					<a href="#" id="form-cancel-button" class="btn btn-default">
+						Cancel
+					</a>
+				</div>
+			</div>
+		</form>
+	</div>
+</template>
+
